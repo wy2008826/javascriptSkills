@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script src="jquery.min.js"></script>
+<body>
+	<script>
+		$(function(){
+			var num=1000;
+			for(var i=0;i<num;i++){
+				var dom=$("<p></p>");
+				dom.html(i);
+				$("body").append(dom);
+			}
+
+			//0.781ms
+			console.time("a");
+			var pLists=$("p");
+			console.timeEnd("a");
+
+
+			//0.014ms
+			console.time("b");
+			var pLists=document.getElementsByTagName("p");
+			console.timeEnd("b");
+
+			//0.089ms
+			console.time("c");
+			var pLists=document.querySelectorAll("p");
+			console.timeEnd("c");
+
+		});
+	</script>
+</body>
+</html>

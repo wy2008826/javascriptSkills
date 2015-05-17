@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta meta name="apple-mobile-web-app-capable" content="yes">
+	<title>Document</title>
+</head>
+<style rel="stylesheet" type="text/css">
+	*{padding:0;margin:0;}
+	body{background: #f1f1f1;}
+	ul{list-style: none;}
+	li{line-height: 40px;text-indent: 30px;border-bottom:1px solid #f1f1f1;background: #fff;}
+	#test{background: #f33;}
+	#top{position: fixed;background: #3f3;width: 100px;bottom:50px;right:20px;cursor: pointer;line-height: 24px;}
+</style>
+<body>
+	<ul>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li id="test">2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+		<li>2134</li>
+	</ul>
+
+	<div id="top">
+		返回顶部
+	</div>
+
+	<script>
+	window.onload=function(){
+		var top=document.getElementById("top");
+		var test=document.getElementById("test");
+		console.log(test);
+		top.onclick=function(){
+			
+			test.scrollIntoView();
+		}
+	}
+		
+	</script>
+</body>
+</html>

@@ -1,4 +1,4 @@
 var elem=document.getElementById("id");
 var rect=elem.getBoundingClientReact();
 rect={bottom: 180,height: 34,left: 471.140625,right: 651.140625,top: 146,width: 180}
-共有六个属性值，包括元素本身的宽高，以及元素相对于屏幕的上下左右距离浏览器窗口边缘的距离
+共有六个属性值，包括元素本身的宽高，以及元素相对于屏幕的上下左右距离文档边缘的距离

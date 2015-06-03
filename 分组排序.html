@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,mininum-scale=1,maximum-scale=1,user-scaleable=no">
+	<title>Document</title>
+</head>
+<body>
+<p>
+分组排序的时候，使用对象，不要使用数组，使用数组需要遍历，对象直接可以检测键是否存在
+</p>
+	<script>
+		var arr=[
+			{"name":"MAC","age":22},
+			{"name":"AK","age":3},
+			{"name":"FK","age":49},
+			{"name":"CMN","age":2},
+			{"name":"KHY","age":42},
+			{"name":"CN","age":2},
+			{"name":"FM","age":125},
+			{"name":"XVB","age":75},
+			{"name":"HY","age":12},
+			{"name":"FL","age":85},
+			{"name":"NB","age":35}
+		];
+
+		var obj={};
+		arr=arr.sort(function(item1,item2){
+			var name1=item1.name;
+			var name2=item2.name;
+			return name1.localeCompare(name2)
+		});
+
+		for(var i=0;i<arr.length;i++){
+			var curChart=arr[i].name.substr(0,1);
+			if(!obj[curChart]){
+				obj[curChart]=[];
+				obj[curChart].push(arr[i]);
+			}
+			else{
+				obj[curChart].push(arr[i]);
+			}
+		}
+		console.log(obj);
+	</script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+$("body").animate({"scrollTop":0},400) 这种写发在谷歌和火狐浏览器中是正常的，ie下失效
+
+$("html,body").animate({"scrollTop":0},400) ie下需要加上html才能有效

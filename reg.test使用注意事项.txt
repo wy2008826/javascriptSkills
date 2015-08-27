@@ -1,0 +1,7 @@
+当reg带有g标识符的时候，下一次会从上一次结束的位置test
+如 reg=/^\d*$/g;
+
+第一次 reg.test(123)   true
+第二次 reg.test(123)   变为false
+
+移除g标识符   一切正常

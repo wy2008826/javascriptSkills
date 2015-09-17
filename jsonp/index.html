@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsonp</title>
+</head>
+<body>
+	<script>
+		var getData=function(data){
+			alert("已经获取到外部数据！"+data.name.toUpperCase());
+		}
+
+		var url="abew.com/jsonp.php?callback=getData";
+		var script=document.createElement("script");
+		script.setAttribute("src",url);
+		document.getElementsByTagName("head")[0].appendChild(script);
+
+		//远程返回 getData({success:true,result:[1,2,3]})  
+		
+		
+		//不能返回成字符串  虽然可以使用eval来执行
+		var res="getData({name:'wangyu'})"
+		eval(res);
+    
+    jsonp的原理是生成动态的js文件，js文件使用函数名包裹着数据的形式 当script文件加载成功后会自动执行里面的函数，
+    （把包裹着的数据作为参数，调用页面上已经定义好的函数）
+	</script>
+</body>
+</html>

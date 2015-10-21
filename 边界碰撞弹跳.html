@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{padding:0;margin:0;}
+	ul{list-style: none;}
+	#v{width: 200px;border:1px solid #f93;margin:40px auto;height: 200px;overflow: hidden;}
+	#v_ul li{line-height: 30px;text-indent: 20px;}
+
+	#h{width: 300px;height: 40px;border:1px solid #f93;overflow: hidden;margin:0 auto;}
+	#h_ul span{line-height: 40px;padding:0 15px;}
+	#h_ul{white-space:nowrap;width: auto;display: inline;}
+</style>
+<body>
+	<div id="v">
+		<ul id="v_ul">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+			<li>6</li>
+			<li>7</li>
+			<li>8</li>
+			<li>9</li>
+			<li>10</li>
+		</ul>
+	</div>
+
+<!-- 横向的css设置很重要 -->
+	<div id="h">
+		<div id="h_ul">
+			<span>1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+			<span>6</span>
+			<span>7</span>
+			<span>8</span>
+			<span>9</span>
+			<span>10</span>
+		</div>
+	</div>
+	<script>
+		var qunee=document.getElementById("v");
+		var ul=document.getElementById("v_ul");
+
+		var speed=50;
+		var direction="down";
+		function mar(){
+			
+			if(direction=="down"){
+				if(qunee.scrollTop>=(ul.offsetHeight-qunee.offsetHeight)){
+					direction="up"
+				}else{
+					qunee.scrollTop++;
+				}
+			}
+			else if(direction=="up"){
+				if(qunee.scrollTop<=0){
+					direction="down"
+				}else{
+					qunee.scrollTop--;
+				}
+			};
+			// var li=document.createElement("li");
+			// li.innerHTML="test"
+			// ul.appendChild(li);
+		}
+
+		setInterval(mar,speed);
+
+
+		var direction_h="left";
+		var h=document.getElementById("h");
+		var h_ul=document.getElementById("h_ul");
+		function mar_h(){
+			
+			if(direction_h=="left"){
+				if(h.scrollLeft>=(h_ul.offsetWidth-h.offsetWidth)){
+					direction_h="right"
+				}else{
+					h.scrollLeft++;
+				}
+			}
+			else if(direction_h=="right"){
+				if(h.scrollLeft<=0){
+					direction_h="left"
+				}else{
+					h.scrollLeft--;
+				}
+			}
+		}
+
+		function boundaryBounce(dir,wraper,inner){
+			if(dir=="h"){
+
+			}
+			else if(dir="v"){
+				wraper.setAttribute("data-dir","down");
+			}
+		}
+		setInterval(mar_h,speed);
+	</script>
+</body>
+</html>

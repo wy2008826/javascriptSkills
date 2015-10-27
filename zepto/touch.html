@@ -1,1 +1,37 @@
-test
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,minimum-scale=1.0, maximum-scale=1.0">
+	<title>钱保姆1周岁生日大轰趴-${webname}</title>
+	<meta name="keywords" content="" />
+	<meta name="description" content="" />
+	<title>zepto</title>
+</head>
+
+<style>
+	*{padding:0;margin:0;}
+	ul{list-style: none;}
+	.test{line-height: 30px;display: block;width: 200px;text-align: center;border-radius: 6px;background: #f93;color:#fff;}
+
+</style>
+<body>
+	<span class="test">测试</span>
+
+
+
+	<script src="zepto.min.js"></script>
+	<script src="touch.js"></script>
+
+	<script>
+		$(function(){
+			$(".test").tap(function(){
+				console.log(123);
+			}).swipeLeft(function(){
+				console.log("left");
+			});
+		});
+	</script>
+</body>
+</html>

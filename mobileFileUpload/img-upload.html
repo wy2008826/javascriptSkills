@@ -1,8 +1,17 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,minimum-scale=1.0, maximum-scale=1.0">
 	<title>Document</title>
+
+	<style>
+		*{padding:0;margin:0;}
+		.file_wraper{border:1px solid #e5e5e5;height: 60px;width: 260px;margin:20px auto;}
+		.file_input{display: none;}
+		.picker{display: block;height:100%;width:100%;}
+	</style>
+	<link rel="stylesheet" href="css/dropzone.css">
 </head>
 <body>
 	<h3>
@@ -14,8 +23,27 @@
 		<a href="http://fex.baidu.com/webuploader/demo.html">DEMO</a>
 	</p>
 	
-
-	<script src="webuploader.html5only.min.js"></script>
 	
+
+	<div action=""  class="file_wraper" id="file_wraper">
+		
+	</div>
+
+	<script src="jquery.min.js"></script>
+	<script src="dropzone.min.js"></script>
+
+	<script>
+		
+
+		(function(){
+			$("#file_wraper").dropzone({
+				init:function(){
+
+				},
+				url:"www.baidu.com",
+
+			});
+		})();
+	</script>
 </body>
 </html>

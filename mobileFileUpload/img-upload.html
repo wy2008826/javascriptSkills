@@ -28,6 +28,9 @@
 	<div action=""  class="file_wraper" id="file_wraper">
 		
 	</div>
+	
+
+	<input type="file" id="file_up" multiple="multiple">
 
 	<script src="jquery.min.js"></script>
 	<script src="dropzone.min.js"></script>
@@ -44,6 +47,20 @@
 
 			});
 		})();
+
+
+		$("#file_up").change(function(){
+			var files=this.files;
+
+			var formData=new FormData();
+			for(var i=0;i<files.length;i++){
+				formData.push({
+					name:files[i].name
+				});
+			}
+			console.log(files,formData);
+		});
+
 	</script>
 </body>
 </html>

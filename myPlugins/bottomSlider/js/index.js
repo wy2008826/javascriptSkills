@@ -34,7 +34,7 @@ $(function(){
 		var disTime=endTime-startTime;
 		var speed=Math.abs(disY /  disTime);
 		transform=_getTransform(lists);
-		
+		console.log(_checkBoundary($container[0],lists,"y"));
 		//_animate(lists,0,y,0);
 	}
 
@@ -75,12 +75,24 @@ $(function(){
 		var status={left:false,right:false,top:false,bottom:false};
 		
 		if(direction=="y"){
-			if(transform.y>0){
-				status.tooBottom=true;
+			if(inner.offsetHeight<=wraper.offsetHeight){
+				status.top=true;
 			}
+			else{
+				if(transform.y>0){
+					status.top=true;
+				}
+				else if(transform.y<0&&(-transform.y+wraper.offsetHeight>=inner.offsetHeight)){
+					status.bottom=true;
+				}
+			}
+			
 		}
+
+		return status;
 		
 	}
+
 
 
 	function _animate(dom,x,y,z){

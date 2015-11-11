@@ -17,6 +17,7 @@
 <body>
 	
 	<div class="container" id="container">
+		
 		<ul class="lists">
 			<li>1</li>
 			<li>2</li>
@@ -36,8 +37,24 @@
 			<li>16</li>
 		</ul>
 	</div>
+	
+	<button id="test">点击测试</button>
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/index.js"></script>
+	<script src="js/data.js"></script>
+	<script>
+	$("#test").MultiSlide({
+		data:data,//数据
+		colsScale:"1:1:2",
+		rows:5,//可以显现的行数
+		lineHeight:30,//每一行的行高
+		theme:"#f94",
+		zIndex:1000,
+		confirm:function(data){
+			console.log(data);
+		}
+	});
+	</script>
 </body>
 </html>

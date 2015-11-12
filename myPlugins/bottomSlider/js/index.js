@@ -1,5 +1,5 @@
 ;(function(){
-
+	//数据列表整理后传递一个对象数组
 
 	var defaultOption={
 		colsScale:"1:1:1",
@@ -13,7 +13,9 @@
 		shadeBg:"#ddd",
 		hrBorder:"1px solid #f0f0f0",
 		zIndex:1000,
-		ulIdPrefix:"multiUl"
+		ulIdPrefix:"multiUl",
+		listFontSize:"12px",
+		listAlign:"center"
 	};
 
 	var MultiSlide=function(option){
@@ -24,8 +26,24 @@
 			$("."+options.wraperClass).remove();
 		
 		};
+		this._checkBoundary=function(wraper,inner,direction){//检测边缘状态
+			var options=this.options;
+			var transform=_getTransform(inner);
+			var status={left:false,right:false,top:false,bottom:false};
+			var halfHeight=((options.rows-1)/2)*options.lineHeight;
+			
+			if(transform.y>=halfHeight){
+				status.top=true;
+			}
+			else if((transform.y+inner.offsetHeight)<=(halfHeight+options.lineHeight)){
+				status.bottom=true;
+			}
+			console.log(transform,transform.y+inner.offsetHeight,inner);
+			return status;
+		}
 		this.init();
-		this.initDom();
+		this.initDom();//初始化dom结构
+		this.initLists();//填充列表数据
 	}
 
 	MultiSlide.prototype={
@@ -73,7 +91,8 @@
 				left:"0",
 				marginTop:- options.lineHeight / 2,
 				borderTop:options.hrBorder,
-				borderBottom:options.hrBorder
+				borderBottom:options.hrBorder,
+				zIndex:options.zIndex+1
 			});
 			$content.append($hr);
 
@@ -91,15 +110,23 @@
 				zIndex:options.zIndex-1
 			});
 
+			$shade.click(function(){
+				//_animate($wraper[0],0,0,0,"y",undefined,self._removeMulti.bind(self));
+			});
 			var colArr=options.colsScale.split(":");
 			var colSum=_arrSum(colArr);
 
-			for(var i=0;i<colArr.length;i++){
+			for(var i=0;i<colArr.length;i++){//生成ul列表
 				var $ul=$("<ul></ul>").attr("id",options.ulIdPrefix+i);
 				var itemWidth=(colArr[i]/colSum)*100 +"%";
 				$ul.css({
 					width:itemWidth,
-					float:"left"
+					float:"left",
+					overflow:"hidden",
+					position:"relative",
+					zIndex:options.zIndex+2,
+					fontSize:options.listFontSize,
+					textAlign:options.listAlign
 				});
 				$content.append($ul);
 			}
@@ -112,6 +139,61 @@
 			$header.find(".bottom_confirm")[0].onclick=function(e){
 				options.confirm(12423);
 			};
+			$wraper[0].addEventListener("touchstart",startHandler);
+			$wraper[0].addEventListener("touchmove",moveHandler);
+			$wraper[0].addEventListener("touchend",endHandler);
+
+			var startPos;
+			var movePos;
+			var endPos;
+			var startTime;
+			var endTime;
+			var transform;
+			var startLists;
+			function startHandler(e){
+				var listsId=$(e.target).parent().attr("id");
+				console.log(listsId);
+				startLists=$("#"+listsId)[0];
+
+				startPos=_getPos(e.touches[0]);
+				startTime=e.timeStamp;
+				transform=_getTransform(startLists);
+
+				
+			}
+
+			function moveHandler(e){
+				movePos=_getPos(e.touches[0]);
+				var disY=_getDis(movePos,startPos).disY;
+				//console.log(transform);
+				var y=transform.y+disY;
+				_setTransform(startLists,0,y,0);
+			}
+
+			function endHandler(e){
+				endTime=e.timeStamp;
+				var disY=_getDis(movePos,startPos).disY;
+				var disTime=endTime-startTime;
+				var speed=Math.abs(disY /  disTime);
+				transform=_getTransform(startLists);
+
+				var boundary=self._checkBoundary($wraper[0],startLists,"y");
+				var halfHeight=((options.rows-1)/2)*options.lineHeight;
+
+				
+				if(boundary.top){//
+					var y=halfHeight;
+				}
+				else if(boundary.bottom){
+					var y=-startLists.offsetHeight+halfHeight+options.lineHeight;
+				}
+				else{
+					var y=Math.round(transform.y/options.lineHeight)*options.lineHeight;
+				}
+
+				_animate(startLists,0,y,0,"y",speed);
+			}
+
 
 
 			$wraper.append($header);
@@ -121,6 +203,41 @@
 			$("body").append($shade).append($wraper);
 			_animate($wraper[0],0,-options.rows*options.lineHeight-options.headerHeight,0,"y",undefined);
 			console.timeEnd("start");
+		},
+		initLists:function(){
+			var self=this;
+			var options=self.options;
+			var colsNum=options.colsScale.split(":").length;
+			for(var i=0;i<colsNum;i++){
+				var ulId=options.ulIdPrefix+i;
+				var y=((options.rows -1)/2)*options.lineHeight;
+
+				if(i==0){
+					fillList(data,$("#"+ulId)[0],{x:0,y:y,z:0});
+				}
+				else if(i==1){
+					fillList(data[0].lists,$("#"+ulId)[0],{x:0,y:y,z:0});
+				}
+				else if(i==2){
+					fillList(data[0].lists[0].lists,$("#"+ulId)[0],{x:0,y:y,z:0});
+				}
+				
+			}
+
+
+			function fillList(arr,ul,translateXYZ){
+				for(var i=0;i<arr.length;i++){
+					var li=document.createElement("li");
+					li.innerHTML=arr[i].name;
+					li.style.lineHeight=options.lineHeight+"px";
+					
+					if(arr[i].id){
+						li.setAttribute("data-id",arr[i].id);
+					}
+					ul.appendChild(li);
+					_setTransform(ul,0,translateXYZ.y,0);
+				}
+			}
 		}
 	};
 
@@ -138,9 +255,9 @@
 
 	var $container=$("#container");
 	var lists=$container.find(".lists")[0];
-	$container[0].addEventListener("touchstart",startHandler);
-	$container[0].addEventListener("touchmove",moveHandler);
-	$container[0].addEventListener("touchend",endHandler);
+	// $container[0].addEventListener("touchstart",startHandler);
+	// $container[0].addEventListener("touchmove",moveHandler);
+	// $container[0].addEventListener("touchend",endHandler);
 
 	var startPos;
 	var movePos;
@@ -266,7 +383,6 @@
 				}
 			}
 		}
-
 
 	}
 

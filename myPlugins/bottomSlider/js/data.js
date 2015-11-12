@@ -26,6 +26,50 @@ var data=[
 						id:"zjgsdx"
 					}
 				]
+			},
+			{
+				name:"宁波市",
+				id:"nbs",
+				lists:[
+					{
+						name:"宁波大学",
+						id:"nbdx"
+					},
+					{
+						name:"宁波理工大学",
+						id:"nblgdx"
+					},
+					{
+						name:"宁波电子科技大学",
+						id:"nblgdx"
+					},
+					{
+						name:"宁波工商大学",
+						id:"nbgsdx"
+					}
+				]
+			},
+			{
+				name:"温州市",
+				id:"wzs",
+				lists:[
+					{
+						name:"温州大学",
+						id:"wzdx"
+					},
+					{
+						name:"温州理工大学",
+						id:"wzlgdx"
+					},
+					{
+						name:"温州电子科技大学",
+						id:"wzlgdx"
+					},
+					{
+						name:"温州工商大学",
+						id:"wzgsdx"
+					}
+				]
 			}
 		]
 	}

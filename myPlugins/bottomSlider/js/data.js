@@ -24,6 +24,22 @@ var data=[
 					{
 						name:"浙江工商大学",
 						id:"zjgsdx"
+					},
+					{
+						name:"浙江大学",
+						id:"zjdx"
+					},
+					{
+						name:"浙江理工大学",
+						id:"zjlgdx"
+					},
+					{
+						name:"杭州电子科技大学",
+						id:"zjlgdx"
+					},
+					{
+						name:"浙江工商大学",
+						id:"zjgsdx"
 					}
 				]
 			},
@@ -67,6 +83,94 @@ var data=[
 					},
 					{
 						name:"温州工商大学",
+						id:"wzgsdx"
+					}
+				]
+			}
+		]
+	},
+	{
+		name:"江苏省",
+		id:"js",
+		lists:[
+			{
+				name:"南京市",
+				id:"hzs",
+				lists:[
+					{
+						name:"南京大学",
+						id:"zjdx"
+					},
+					{
+						name:"南京理工大学",
+						id:"zjlgdx"
+					},
+					{
+						name:"南京电子科技大学",
+						id:"zjlgdx"
+					},
+					{
+						name:"南京工商大学",
+						id:"zjgsdx"
+					},
+					{
+						name:"南京大学",
+						id:"zjdx"
+					},
+					{
+						name:"南京理工大学",
+						id:"zjlgdx"
+					},
+					{
+						name:"南京电子科技大学",
+						id:"zjlgdx"
+					},
+					{
+						name:"南京工商大学",
+						id:"zjgsdx"
+					}
+				]
+			},
+			{
+				name:"无锡市",
+				id:"nbs",
+				lists:[
+					{
+						name:"无锡大学",
+						id:"nbdx"
+					},
+					{
+						name:"无锡理工大学",
+						id:"nblgdx"
+					},
+					{
+						name:"无锡电子科技大学",
+						id:"nblgdx"
+					},
+					{
+						name:"无锡工商大学",
+						id:"nbgsdx"
+					}
+				]
+			},
+			{
+				name:"苏州市",
+				id:"wzs",
+				lists:[
+					{
+						name:"苏州大学",
+						id:"wzdx"
+					},
+					{
+						name:"苏州理工大学",
+						id:"wzlgdx"
+					},
+					{
+						name:"苏州电子科技大学",
+						id:"wzlgdx"
+					},
+					{
+						name:"苏州工商大学",
 						id:"wzgsdx"
 					}
 				]

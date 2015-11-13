@@ -1,3 +1,8 @@
+// 1.data的格式和名称需要一致
+// 2.Multiselect配置是否是多选  最后一项的数据是否可以多项选择
+
+
+
 ;(function(){
 	//数据列表整理后传递一个对象数组
 
@@ -14,6 +19,7 @@
 		hrBorder:"1px solid #f0f0f0",
 		zIndex:1000,
 		ulIdPrefix:"multiUl",
+		ulWraperIdPrefix:"multiUlWraper",
 		listFontSize:"12px",
 		listAlign:"center"
 	};
@@ -41,6 +47,7 @@
 			return status;
 		};
 		this._fillList=function(arr,ul,translateXYZ){
+			ul.innerHTML="";
 			var options=this.options;
 			for(var i=0;i<arr.length;i++){
 				var li=document.createElement("li");
@@ -52,11 +59,74 @@
 				}
 				ul.appendChild(li);
 				if(!translateXYZ){
-					translateXYZ=((options.rows -1)/2)*options.lineHeight;
+					translateXYZ={};
+					translateXYZ.y=((options.rows -1)/2)*options.lineHeight;
 				}
-				_setTransform(ul,0,translateXYZ.y,0);
 			}
+
+			_animate(ul,0,translateXYZ.y,0,"y",undefined)
 		};
+		this._getActiveLi=function(ul){
+			var options=this.options;
+			var transform=_getTransform(ul);
+			var liIndex=(-transform.y+((options.rows-1)/2)*options.lineHeight)/options.lineHeight;
+
+			return liIndex;
+			
+		};
+		this._getAllAcitiveLi=function(){
+			var options=this.options;
+			var length=options.colsScale.split(":").length;
+			var indexArr=[];
+			for(var i=0;i<length;i++ ){
+				var ul=document.getElementById(options.ulIdPrefix+i);
+				var transform=_getTransform(ul);
+				var liIndex=(-transform.y+((options.rows-1)/2)*options.lineHeight)/options.lineHeight;
+				indexArr.push({ul:ul,index:liIndex});
+			}
+
+			return indexArr;
+		}
+		this._touchEnd=function(activeUlIndex){//传递当前的点击的ul
+			var options=this.options;
+			var data={};
+
+			var activeUl=document.getElementById(options.ulIdPrefix+activeUlIndex);
+			var activeLiIndex=this._getActiveLi(activeUl);
+			var activeLi=activeUl.getElementsByTagName("li")[activeLiIndex];
+
+			var col0_ul=document.getElementById(options.ulIdPrefix+0);
+			var col1_ul=document.getElementById(options.ulIdPrefix+1);
+			var col2_ul=document.getElementById(options.ulIdPrefix+2);
+			var col0_liIndex=this._getActiveLi(col0_ul);
+			var col1_liIndex=this._getActiveLi(col1_ul);
+
+			
+			if(activeUlIndex==0){
+				var col1_Data=options.data[activeLiIndex].lists;
+				var col2_Data=options.data[activeLiIndex].lists[0].lists;
+				this._fillList(col1_Data,col1_ul);
+				this._fillList(col2_Data,col2_ul);
+			}
+			else if(activeUlIndex==1){
+				var col2_Data=options.data[col0_liIndex].lists[col1_liIndex].lists;
+				this._fillList(col2_Data,col2_ul);
+			}
+			else if(activeUlIndex==2){
+				
+			}
+			//console.log(options.data);
+			options.touchEnd(data);
+		};
+
+		this._confirm=function(){
+			var listsIndex=this._getAllAcitiveLi();
+			//console.log(listsIndex);
+
+			$(this.options.elem).data("selectedData",listsIndex);
+
+			this.options.confirm("selectedData");
+		}
 		this.init();
 		this.initDom();//初始化dom结构
 		this.initLists();//填充列表数据
@@ -133,10 +203,14 @@
 			var colSum=_arrSum(colArr);
 
 			for(var i=0;i<colArr.length;i++){//生成ul列表
+
 				var $ul=$("<ul></ul>").attr("id",options.ulIdPrefix+i);
+				var $div=$("<div></div>").attr("id",options.ulWraperIdPrefix+i);
+				$div.attr("class",options.ulWraperIdPrefix);
 				var itemWidth=(colArr[i]/colSum)*100 +"%";
-				$ul.css({
+				$div.css({
 					width:itemWidth,
+					height:"100%",
 					float:"left",
 					overflow:"hidden",
 					position:"relative",
@@ -144,7 +218,19 @@
 					fontSize:options.listFontSize,
 					textAlign:options.listAlign
 				});
-				$content.append($ul);
+				
+				$div.append($ul);
+				$content.append($div);
+				if(options.Multiselect){
+					if(i==colArr.length-1){
+						$div[0].onclick=function(e){
+							if(e.target.tagName=="LI"){
+								$(e.target).toggleClass("active");
+							}
+						}
+					}
+					
+				}
 			}
 
 
@@ -153,11 +239,13 @@
 				
 			};
 			$header.find(".bottom_confirm")[0].onclick=function(e){
-				options.confirm(12423);
+				self._confirm();
+				_animate($wraper[0],0,0,0,"y",undefined,self._removeMulti.bind(self));
+				
 			};
-			$wraper[0].addEventListener("touchstart",startHandler);
-			$wraper[0].addEventListener("touchmove",moveHandler);
-			$wraper[0].addEventListener("touchend",endHandler);
+			$content[0].addEventListener("touchstart",startHandler);
+			$content[0].addEventListener("touchmove",moveHandler);
+			$content[0].addEventListener("touchend",endHandler);
 
 			var startPos;
 			var movePos;
@@ -166,29 +254,34 @@
 			var endTime;
 			var transform;
 			var startLists;
+			var ulIndex;
+			var isClick=true;
 			function startHandler(e){
-				var listsId=$(e.target).parent().attr("id");
-				
-				startLists=$("#"+listsId)[0];
 
+				isClick=false;
+				var listsId=$(e.target).closest("div").attr("id");
+				ulIndex=listsId.match(/\d/)[0];
+				startLists=$("#"+listsId).find("ul")[0];
+				
 				startPos=_getPos(e.touches[0]);
 				startTime=e.timeStamp;
 				transform=_getTransform(startLists);
-
 				
 			}
 
 			function moveHandler(e){
+
+				isClick=false;
 				movePos=_getPos(e.touches[0]);
 				var disY=_getDis(movePos,startPos).disY;
-				//console.log(transform);
+				
 				var y=transform.y+disY;
 				_setTransform(startLists,0,y,0);
 			}
 
 			function endHandler(e){
 				endTime=e.timeStamp;
-				var disY=_getDis(movePos,startPos).disY;
+				var disY=_getDis(movePos||startPos,startPos).disY;
 				var disTime=endTime-startTime;
 				var speed=Math.abs(disY /  disTime);
 				transform=_getTransform(startLists);
@@ -206,8 +299,11 @@
 				else{
 					var y=Math.round(transform.y/options.lineHeight)*options.lineHeight;
 				}
+				if(!isClick){//检测是否是点击
+					_animate(startLists,0,y,0,"y",speed,self._touchEnd.bind(self,ulIndex));
+				}
 
-				_animate(startLists,0,y,0,"y",speed);
+				isClick=true;
 			}
 
 
@@ -218,15 +314,23 @@
 
 			$("body").append($shade).append($wraper);
 			_animate($wraper[0],0,-options.rows*options.lineHeight-options.headerHeight,0,"y",undefined);
-			console.timeEnd("start");
+			
 		},
 		initLists:function(){
 			var self=this;
 			var options=self.options;
 			var colsNum=options.colsScale.split(":").length;
+			var halfHeight=((options.rows -1)/2)*options.lineHeight;
 			for(var i=0;i<colsNum;i++){
 				var ulId=options.ulIdPrefix+i;
-				var y=((options.rows -1)/2)*options.lineHeight;
+				var $data=$(options.elem).data("selectedData");
+				if($data){
+					var y=halfHeight-parseInt($data[i].index)*options.lineHeight;
+				}
+				else{
+					var y=halfHeight;
+				}
+				
 
 				if(i==0){
 					self._fillList(data,$("#"+ulId)[0],{x:0,y:y,z:0});
@@ -247,63 +351,16 @@
 		var options=$.extend(defaultOption,options);
 		
 		return this.each(function(index,elem){
-			(function(elem){
+			// (function(elem){
 				elem.onclick=function(e){
+					console.time("start");
+					options.elem=elem;
 					var multiSlide=new MultiSlide(options);
+					console.timeEnd("start");
 				}
-			})(elem);
+			// })(elem);
 		});
 	};
-
-	var $container=$("#container");
-	var lists=$container.find(".lists")[0];
-	// $container[0].addEventListener("touchstart",startHandler);
-	// $container[0].addEventListener("touchmove",moveHandler);
-	// $container[0].addEventListener("touchend",endHandler);
-
-	var startPos;
-	var movePos;
-	var endPos;
-	var startTime;
-	var endTime;
-	var transform;
-	function startHandler(e){
-		
-		startPos=_getPos(e.touches[0]);
-		startTime=e.timeStamp;
-		transform=_getTransform(lists);
-
-		//console.log(transform);
-	}
-
-	function moveHandler(e){
-		movePos=_getPos(e.touches[0]);
-		var disY=_getDis(movePos,startPos).disY;
-		//console.log(transform);
-		var y=transform.y+disY;
-		_setTransform(lists,0,y,0);
-	}
-
-	function endHandler(e){
-		endTime=e.timeStamp;
-		var disY=_getDis(movePos,startPos).disY;
-		var disTime=endTime-startTime;
-		var speed=Math.abs(disY /  disTime);
-		transform=_getTransform(lists);
-
-		var boundary=_checkBoundary($container[0],lists,"y");
-		if(boundary.top){//
-			var y=0;
-		}
-		else if(boundary.bottom){
-			var y=$container[0].offsetHeight-lists.offsetHeight;
-		}
-		else{
-
-		}
-
-		_animate(lists,0,y,0,"y",speed);
-	}
 
 
 	function _getPos(touches){//获取手指的屏幕位置

@@ -11,7 +11,9 @@
 	.container{height: 300px;width: 160px;border:1px solid #e5e5e5;overflow: hidden;}
 	.container ul{list-style: none;}
 	.container ul li{line-height: 30px;border-bottom: 1px solid #e5e5e5;text-indent: 20px;} 
-
+	
+	.multiUlWraper li.active{
+	color:#f93;}
 	</style>
 </head>
 <body>
@@ -47,12 +49,13 @@
 	$("#test").MultiSlide({
 		data:data,//数据
 		colsScale:"1:1:2",
-		rows:5,//可以显现的行数
-		lineHeight:30,//每一行的行高
-		theme:"#f94",
-		zIndex:1000,
-		confirm:function(data){
-			console.log(data);
+		Multiselect:true,
+		touchEnd:function(areaData){
+
+		},
+		confirm:function($dataName){
+			
+			console.log($("#test").data($dataName));
 		}
 	});
 	</script>

@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no,minimum-scale=1.0, maximum-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport' />
+	<meta  name="apple-mobile-web-app-capable" content="yes" />
 	<title>Document</title>
 
 	<style>
@@ -18,46 +18,53 @@
 </head>
 <body>
 	
-	<div class="container" id="container">
-		
-		<ul class="lists">
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
-			<li>5</li>
-			<li>6</li>
-			<li>7</li>
-			<li>8</li>
-			<li>9</li>
-			<li>10</li>
-			<li>11</li>
-			<li>12</li>
-			<li>13</li>
-			<li>14</li>
-			<li>15</li>
-			<li>16</li>
-		</ul>
-	</div>
+	
 	
 	<button id="test">点击测试</button>
+
+	<!-- <input id="test" type="button" value="点击测试"> -->
+	<!-- <label id="test">点击测试</label> -->
+
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/index.js"></script>
 	<script src="js/data.js"></script>
 	<script>
-	$("#test").MultiSlide({
-		data:data,//数据
-		colsScale:"1:1:2",
-		Multiselect:true,
-		touchEnd:function(areaData){
+	// $("#test").MultiSlide({
+	// 	data:data,//数据
+	// 	colsScale:"1:1:2",
+	// 	Multiselect:false,
+	// 	touchEnd:function(areaData){
 
-		},
-		confirm:function($dataName){
+	// 	},
+	// 	confirm:function($dataName){
 			
-			console.log($("#test").data($dataName));
+	// 		console.log($("#test").data($dataName));
+	// 	}
+	// });
+
+	var App=function(){
+		this.init();
+	};
+	App.prototype={
+		init:function(){
+			$("#test").MultiSlide({
+				data:data,//数据
+				colsScale:"1:1:2",
+				Multiselect:false,
+				touchEnd:function(areaData){
+
+				},
+				confirm:function($dataName){
+					
+					console.log($("#test").data($dataName));
+				}
+			});
 		}
-	});
+	}
+
+	var app=new App();
 	</script>
+
 </body>
 </html>

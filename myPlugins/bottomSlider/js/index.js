@@ -294,10 +294,13 @@
 				_animate($wraper[0],0,0,0,"y",undefined,self._removeMulti.bind(self));
 				
 			};
-			$content[0].addEventListener("touchstart",startHandler);
-			$content[0].addEventListener("touchmove",moveHandler);
-			$content[0].addEventListener("touchend",endHandler);
+			setTimeout(function(){
+				$content[0].addEventListener("touchstart",startHandler);
+				$content[0].addEventListener("touchmove",moveHandler);
+				$content[0].addEventListener("touchend",endHandler);
 
+			},0);
+			
 
 			var startPos;
 			var movePos;

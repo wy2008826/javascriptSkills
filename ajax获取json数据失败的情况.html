@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<h3>有时候后台给的数据不符合json格式，使用jquery的dataType:json会导致<br>
+		ajax走到error里面，可以后台传递string  然后通过eval('('+data+')')
+	</h3>
+	<script>
+		$.ajax({
+			url:"",
+			type:"GET",
+			success:function(data){
+				data=eval('('+data+')');
+			}
+		});
+	</script>
+</body>
+</html>

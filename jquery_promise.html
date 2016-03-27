@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquey_promise</title>
+	<style>
+	*{padding:0;margin:0;}
+	.item{width: 50px;height:50px;border:1px solid red;margin:10px auto;background-color: #f33;}
+	</style>
+</head>
+<body>
+	
+	<div class="item animateEle1">1</div>
+	<div class="item animateEle2">2</div>
+	<div class="item animateEle3">3</div>
+
+
+
+	<script src="./jquery.min.js"></script>
+	<script>
+
+	$(function(){
+		var animate1 = function() {
+		  return $('.animateEle1').animate({opacity:'.5'},4000).promise();
+		};
+		var animate2 = function() {
+		  return $('.animateEle2').animate({width:'100px'},2000).promise();
+		};
+		var animate3 = function(){
+		  return $('.animateEle3').animate({height:'0'},2000).promise();
+		};
+		// so easy,有木有，so clear，有木有
+		$.when(animate1()).then(animate2).then(animate3);
+
+	});
+	</script>
+</body>
+</html>

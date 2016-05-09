@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="telephone=no" name="format-detection">
+	<title>类数组对象</title>
+</head>
+<body>
+	<h3>类数组对象</h3>
+	<p>[].push.call({},"string");</p>
+	<script>
+		function test(){
+			var o={};
+			var a=["a","b","c"];
+			[].push.apply(o,a);
+			console.log(o);//{0:"a",1:"b",2:"c",length:3}
+		}
+
+		test();
+
+
+
+	</script>
+</body>
+</html>

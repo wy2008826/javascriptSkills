@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="telephone=no" name="format-detection">
+	<title>函数的静态方法</title>
+</head>
+<body>
+	<h3>函数的静态方法</h3>
+
+	<script>
+
+		function test(){
+			var i=1;
+			console.log(test.a,test._b);
+		}
+		test.a=1;
+		test.b=(function(){
+			var i=1000;
+			return function(){
+				i+=1;
+				test._b=i;
+			}
+		}());
+
+		test.a=123;//a属性容易被外部代码恶意修改
+		test.b();//_b属性因为使用的是闭包 所以会自动记忆上次的结果  并且不能再外部被恶意修改
+		test();
+
+
+		test.a="b";
+		test.b();
+		test();
+
+
+	</script>
+</body>
+</html>

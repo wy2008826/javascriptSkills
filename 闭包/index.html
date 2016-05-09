@@ -12,11 +12,12 @@
 
 
 	<script>
+		var i=1000;
 		var testClose=function(){
 			var i=0;
 			return function(){
 				i+=1;
-				console.log(i);
+				console.log(i);//i在外部调用闭包的时候  依然是调用的内部i  而非外部的i=1000
 			}
 		}
 
@@ -24,6 +25,20 @@
 		test();//1
 		test();//2
 		test();//3
+
+		var scope="outer scope";
+		function checkScope(){
+			var scope="local scope!";
+
+			function f(){
+				return scope;
+			}
+
+			return f;
+		}
+
+		console.log(checkScope()());//local scope   查找scope的时候会沿着作用域链进行查找  local scope依然处于作用域链上
+
 
 	</script>
 </body>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="telephone=no" name="format-detection">
+	<title>函数的bind方法的具体使用细节</title>
+</head>
+<body>
+
+	<h3>函数的bind方法的具体使用细节</h3>
+	<script>
+		function test(x,y,z){
+			return x+y+z;
+		}
+
+		var t=test.bind(null,1,2);//第一次bind的时候传递的参数会作为形参的参数 在后续函数执行的时候传递的实参会排列在该函数序列之后
+
+		console.log(t(3));
+	</script>
+</body>
+</html>

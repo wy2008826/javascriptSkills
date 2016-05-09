@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="telephone=no" name="format-detection">
+	<title>join-concat-字符串分隔拼接</title>
+</head>
+<body>
+	<h3>join-字符串分隔拼接</h3>
+
+	<script>
+		console.log(["a","b","c"].join("|"));
+
+		function test(){
+			var str="string";
+			var newStr=[].join.call(str,"-");//字符串分隔拼接
+			console.log(newStr);
+		}
+
+		test();
+
+	</script>
+</body>
+</html>

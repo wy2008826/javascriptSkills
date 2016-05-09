@@ -11,15 +11,21 @@
 	<h3>类数组对象</h3>
 	<p>[].push.call({},"string");</p>
 	<script>
-		function test(){
+		function testPush(){
 			var o={};
 			var a=["a","b","c"];
-			[].push.apply(o,a);
+			[].push.apply(o,a);//在类数组对象中添加字典
 			console.log(o);//{0:"a",1:"b",2:"c",length:3}
 		}
+		testPush();
 
-		test();
 
+		function testPop(){
+			var o={0:"a",1:"b",2:"c",length:3};//必须有length属性
+			[].pop.apply(o);//删除类数组对象的某个元素
+			console.log(o);//{0:"a",1:"b",length:2}
+		}
+		testPop();
 
 
 	</script>

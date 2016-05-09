@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta content="telephone=no" name="format-detection">
+	<title>闭包</title>
+</head>
+<body>
+	<h3>闭包例子</h3>
+
+	<script>
+		var testClose=function(){
+			var i=0;
+			return function(){
+				i+=1;
+				console.log(i);
+			}
+		}
+
+		var test=testClose();
+		test();//1
+		test();//2
+		test();//3
+
+	</script>
+</body>
+</html>

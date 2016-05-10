@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>slice</title>
+	</head>
+	<body>
+		<h3>slice</h3>
+		<p><strong>1.负数的时候</strong></p>
+		<p><strong>2.把类数组对象转换为数组</strong></p>
+		
+		<script>
+			var arr=["a","b","c","d"];
+			var o={0:"a",1:"b",2:"c",3:"d",4:"e",length:5};
+			console.log(arr.slice(0,1));//a
+			console.log(arr.slice(1));//b c d
+			console.log(arr.slice(-2));//c d 索引  和正数不同的是  -1代表最后一位
+			console.log([].slice.call(o,0)); //["a","b","c","d","e"]
+			
+		</script>
+	</body>
+</html>
+	

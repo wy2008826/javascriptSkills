@@ -8,12 +8,14 @@
 	<title>join-concat-字符串分隔拼接</title>
 </head>
 <body>
-	<h3>join-字符串分隔拼接</h3>
+	<h3>join-concat-字符串分隔拼接</h3>
 
 	<script>
-		console.log(["a","b","c"].join("|"));
+		console.log("join:"+["j","o","i","n"].join("|"));
+		console.log("concat:",["c","o","n","c"].concat(["a","t"]));
 
-		function test(){
+
+		function test(){//分隔拼接字符串
 			var str="string";
 			var newStr=[].join.call(str,"-");//字符串分隔拼接
 			console.log(newStr);
@@ -21,6 +23,15 @@
 
 		test();
 
+
+		function _test(){//合并对象到一个数组中
+			var o1={a:1};
+			var o2={b:2};
+
+			console.log([].concat.call(o1,o2));
+		}
+
+		_test();
 	</script>
 </body>
 </html>

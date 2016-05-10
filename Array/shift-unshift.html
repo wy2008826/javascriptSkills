@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>shift-unshift</title>
+	</head>
+	<body>
+		<h3>shift：从数组前面删除元素，并返回该元素</h3>
+		<h3>unshift；从数组前面插入元素</h3>
+
+		<script>
+			function test(){
+				var a=["a","b","c","d"];
+				a.shift();
+				console.log(a);
+				a.unshift("add");
+				console.log(a);
+				while(a.shift()){//a.shift 代表删除的那个元素
+					a.shift();
+				}
+				console.log(a);//[]
+			}
+			test();
+		</script>
+	</body>
+</html>
+	

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>贪婪匹配-非贪婪匹配</title>
+	</head>
+	<body>
+		<h3>贪婪匹配-非贪婪匹配</h3>
+		
+		<p><strong>实际上，在量词后面都可以加上？以确定匹配模式</strong></p>
+
+
+		<script>
+			var str="aaab";
+			var reg1=/a+/;//贪婪匹配 匹配尽量多的a
+			var reg2=/a+?/;//非贪婪匹配 匹配尽量少的a 只匹配一个
+			var reg3=/a{2,3}?/ ;//？代表的意思是费贪婪匹配  而不是{2,3}可以不存在 实际上只匹配2个a
+			console.log(str.match(reg1),Array.isArray(str.match(reg1)));//["aaa",index:0,input:"aaab"] 为什么会有这种情况 会是数组
+			console.log(str.match(reg2));//["aaa",index:0,input:"aaab"]
+			console.log(str.match(reg3));//aa
+		</script>
+	</body>
+</html>
+	

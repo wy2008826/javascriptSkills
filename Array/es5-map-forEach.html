@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>es5-map</title>
+	</head>
+	<body>
+		<h3>es5-map:第一个参数是元素  第二个参数是索引   第三个参数是数组本身</h3>
+		<p><strong>原数组不会发生改变,会有返回值</strong></p>
+		<br/><br/>
+		
+		<h3>es5-forEach:</h3>
+		<p><strong>原数组不会发生改变,没有返回值，一般只用于操作具体数据，不是为了改变数组</strong></p>
+
+
+		<script>
+		var arr=["a","q","m",1,2,["a","q","m",1,2,["c","d"]]];
+
+		function trate(item,index,ar){
+			var type=typeof item;//如何准确知道一个对象的类型 Object.prototype.toString.call(item);[Object Number]
+			if(type=="string"){
+				return item.toUpperCase();
+			}
+			else if(type=="number"){
+				return item*2;
+			}
+
+			if(Array.isArray(item)){
+				return item.map(trate);
+			}
+		}
+		var newArr=arr.map(trate);
+
+		console.log(newArr);
+
+
+
+		var arr1=[1,2,3,4];
+		var newA1=arr1.forEach(function(item){
+			console.log(item);
+			return item*2;
+		});
+		console.log(arr1,newA1);//[1,2,3,4] undefined
+
+
+		</script>
+	</body>
+</html>
+	

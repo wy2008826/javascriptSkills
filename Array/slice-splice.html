@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>slice-splice</title>
+	</head>
+	<body>
+		<h3>slice：第一个参数为起始位置  第二个参数为终止位置</h3>
+		<p><strong>1.负数的时候</strong></p>
+		<p><strong>2.把类数组对象转换为数组</strong></p>
+		<p><strong>3.slice可以用于字符串 [].slice.call("string",0)=="string".substr(0)</strong></p>
+
+		<h3>splice:第一个参数是起始位置，第二个位置是删除个数，后面的参数是添加的元素</h3>
+		<p><strong>1.删除一定数量的元素</strong></p>
+		<p><strong>2.删除一定数量的元素并在特定位置插入元素</strong></p>
+
+		<script>
+			var arr=["a","b","c","d","e","f"];
+			var o={0:"a",1:"b",2:"c",3:"d",4:"e",length:5};
+			console.log("slice");
+			console.log(arr.slice(0,1));//a
+			console.log(arr.slice(1));//b c d
+			console.log(arr.slice(-2));//c d 索引  和正数不同的是  -1代表最后一位
+			console.log([].slice.call(o,0)); //["a","b","c","d","e"]
+			
+			console.log(arr.splice(3,0,"M","N"));//从某个位置插入元素 插入的元素"M"占在索引3的位置上
+			console.log(arr.splice(3,1,"M","N"));//删除一个元素d  并从该位置插入元素
+		</script>
+	</body>
+</html>
+	

@@ -10,21 +10,23 @@
 		<meta name="x5-fullscreen"content="true"/>
 		<meta name="full-screen"content="yes">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		<title>slice</title>
+		<title>sort</title>
 	</head>
 	<body>
-		<h3>slice</h3>
-		<p><strong>1.负数的时候</strong></p>
-		<p><strong>2.把类数组对象转换为数组</strong></p>
-		
+		<h3>sort:按照字典顺序排序，而不是按照数字大小排序，原数组改变</h3>
+
 		<script>
-			var arr=["a","b","c","d"];
-			var o={0:"a",1:"b",2:"c",3:"d",4:"e",length:5};
-			console.log(arr.slice(0,1));//a
-			console.log(arr.slice(1));//b c d
-			console.log(arr.slice(-2));//c d 索引  和正数不同的是  -1代表最后一位
-			console.log([].slice.call(o,0)); //["a","b","c","d","e"]
-			
+			var arr=["a","q","m","N","M"];
+			var arr1=[1101,110,111,10];
+			console.log(arr.sort());
+			console.log(arr1.sort());//[10, 110, 1101, 111]  并不是按照大小顺序排列 为什么呢
+
+			//自定义排序
+			arr1.sort(function(item1,item2){
+				return item1-item2;
+			});
+
+			console.log(arr1);
 		</script>
 	</body>
 </html>

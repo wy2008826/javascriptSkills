@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>es5-filter</title>
+	</head>
+	<body>
+		<h3>es5-filter:对数组进行过滤：不会更改原有的数组，但是会有返回值，</h3>
+		<p><strong>接收两个参数，第一个参数为过滤函数，第二个参数为指定的过滤函数的this指向</strong></p>
+		<p><strong>可以用于过滤数组，提取特定的元素</strong></p>
+
+		<script>
+		var arr=[1,2,3,4,5,6,"a","b"];
+		var arrFilter=arr.filter(function(item,index,arr){
+			return item>this.max;
+		},new O());
+
+
+		var arrFilter1=arr.filter(function(item,index,arr){
+			return typeof item=="string";
+		});
+
+		function O(){
+			this.max=3;
+		}
+		console.log(arr,arrFilter,arrFilter1);
+		</script>
+	</body>
+</html>
+	

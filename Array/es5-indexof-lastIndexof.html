@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>es5-indexOf-lastIndexOf</title>
+	</head>
+	<body>
+		<h3>es5-indexOf-lastIndexOf</h3>
+		<p><strong>indexOf:判定元素出现的位置：第二个参数代表开始查找的位置</strong></p>
+		<p><strong>如果数组中包含NaN,会导致找不到该元素</strong></p>
+		<script>
+			var arr=[1,2,3,4,"a","b","c","b","c","a","m","a"];
+			console.log(arr.indexOf("a"),arr.indexOf("a",5),arr.lastIndexOf("a"),[NaN].indexOf(NaN));
+		</script>
+	</body>
+</html>
+	

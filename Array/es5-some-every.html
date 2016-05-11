@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>es5-some-every</title>
+	</head>
+	<body>
+		<h3>es5-some-every</h3>
+		<p><strong>断言:assert  some:只要有一个符合条件则返回true</strong></p>
+		<p><strong>断言:assert  every:所有元素都符合条件则返回true</strong></p>
+
+		<script>
+		var arr1=[1,2,3,4,5,6];
+		var arr2=[1,2,3,"a"];
+		var someString=arr1.some(function(item){
+			return typeof item=="string"
+		});
+		var everyNumber=arr1.some(function(item){
+			return typeof item=="number"
+		});
+
+
+		console.log("someString:"+someString,"everyNumber:"+everyNumber);
+		</script>
+	</body>
+</html>
+	

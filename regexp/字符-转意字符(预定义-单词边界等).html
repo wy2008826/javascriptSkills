@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>字符-转意字符(预定义-单词边界等)</title>
+	</head>
+	<body>
+		<h3>字符-转意字符(预定义-单词边界等)</h3>
+		
+		<ul>
+			<li>
+				<h4>\s 匹配空格：包含了制表符 空格符 断行符等 相当于[\t\r\n\v\f]</h4>
+			</li>
+		</ul>
+		<script>
+			/** 换行符和回车符的区别
+				
+				
+				\n  换行符
+				\r 回车符
+				\t 制表符(\u0009)
+				\v 垂直制表符
+				\f 换页符
+				
+
+				\o  NUL字符（\u0000）
+
+				\d 匹配0-9之间的数字
+				\D 匹配所有非0-9之间的数字
+
+				\w 匹配任意的数字 字母 下划线 [a-zA-Z0-9_]
+				\W 除所有的数字 字母 下划线 [^a-zA-Z0-9_]
+				
+				\s 匹配空格 包含了制表符 空格符 断行符等 相当于[\t\r\n\v\f]
+				\S 匹配非空格字符 相当于[^\t\r\n\v\f]
+				
+				\b 匹配单词边界
+				\B 匹配非单词边界
+				
+				\xhh 匹配一个以两位16进制数标示的字符
+				\uhhhh 匹配一个以四位16进制标示unicode字符
+
+
+				其他的需要转意的字符  减号不是特殊字符
+				^ $ . * + ? = ! : | \ / ( ) [ ] { }
+			**/
+
+			console.log(/\bworld/.test("hello world"));//true
+			console.log(/\bworld/.test("hello-world"));//true
+
+			console.log(/\Bworld/.test("hello world"));// false
+			console.log(/\Bworld/.test("helloworld"));// true
+
+
+			var enterStr="<b>Hello</b>\n<i>world!</i>";//换行字符串 js语法不对
+
+			console.log(/world/.test(enterStr));
+
+
+			console.log("两位16进制：",/\xhh/.test(0x12));
+			console.log("四位16进制unicode编码：",/\uhhhh/.test("\u6d4b"));
+
+		</script>
+	</body>
+</html>
+	

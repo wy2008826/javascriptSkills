@@ -43,8 +43,9 @@
 			var reg2=/a+?/;//非贪婪匹配 匹配尽量少的a 只匹配一个
 			var reg3=/a{2,3}?/ ;//？代表的意思是费贪婪匹配  而不是{2,3}可以不存在 实际上只匹配2个a
 			console.log(str.match(reg1),Array.isArray(str.match(reg1)));//["aaa",index:0,input:"aaab"] 为什么会有这种情况 会是数组
-			console.log(str.match(reg2));//["aaa",index:0,input:"aaab"]
+			console.log(str.match(reg2));//["a",index:0,input:"aaab"]
 			console.log(str.match(reg3));//aa
+
 		</script>
 
 

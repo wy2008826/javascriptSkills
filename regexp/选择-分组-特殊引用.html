@@ -19,13 +19,40 @@
 				<h4>选择符： | </h4>
 				<p>/ab|cd|f/：可以匹配ab 或者 cd  或者f</p>
 			</li>
+			<li>
+				<h4>组匹配：()</h4>
+				<p>/[a-z]+(\d+)/:</p>
+				<p>/bc+/    /(bc)+ /</p>
+				<p>/(.)b(.)\2b\1/  组匹配的引用顺序 </p>
+			</li>
 		</ul>
 		<script>
 			var str="strabbccc123ing";
 			var orReg=/a|c+/;
+			var groupReg=/[a-z]+?(\d+)/;
+			var groupReg1=/[a-z]??(\d+)/;//非贪婪模式
+
 
 			console.log(str.match(orReg));//a 只匹配第一项符合匹配规则的匹配项 除非包含了全局修饰符g
+			console.log(str.match(groupReg));//["strabbccc123", "123"]
+			console.log(str.match(groupReg1));//["c123", "123"]
+			console.log("/bc+/",str.match(/bc+/));//bccc
+			console.log("/(bc)+/",str.match(/(bc)+/));//bc
 
+			console.log("abcabc".match(/(.)b(.)/));//["abc", "a", "c"]
+			console.log("abcabc".match(/(.)b(.)/g));//["abc", "abc"]  当有修饰符g的时候 只会捕捉整体，不会匹配分组项
+
+			
+			console.log("abccba123".match(/(.)b(.)\2b\1/) );// \2代表匹配的子组的顺序
+			console.log("abccba123".match(/([a-z]+)/) );// \2代表匹配的子组的顺序
+
+			var str1="abccba123";
+			var reg1=/((a)([a-z]+(\2))(\d+))/;
+			var reg2=/(a)([a-z]+(\1))(\d+)/
+			console.log(str1.match(reg1));//["abccba123", "abccba123", "a", "bccba", "a", "123"] \n可以介于任何圆括号内
+			console.log(str1.match(reg2));// ["abccba123", "a", "bccba", "a", "123"]
+
+			
 
 		</script>
 	</body>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>非捕获组-先行断言</title>
+	</head>
+	<body>
+		<h3>非捕获组-先行断言</h3>
+		<ul>
+			<li>
+				<p>/(?:.)b(.)/   非捕获组  ，?:里面的捕获内容不会进入匹配结果</p>
+			</li>
+			<li>
+				<p>/\d+(?=%)./  先行断言  ?= 匹配后面紧跟着%的数字 </p>
+			</li>
+			<li>
+				<p>/\d+(?!\.)/ 先行否定断言</p>
+			</li>
+		</ul>
+		<script>
+
+		//非捕获组
+		var phStr="abcabc";
+		var phReg=/(?:.)b(.)/;
+		console.log("捕获组:",phStr.match(phReg)); //["abc", "c"] 其中第一个捕获组不会进入匹配结果
+
+		//先行断言
+		var dyStr="213%abc";
+		var dyStr1="hello lucy";
+		var dyReg=/\d+(?=%)/;
+		var dyReg1=/\hello\s(?=jack|lucy)/;//先行断言会包括括号里面的整体  而不是紧跟着的%
+
+
+		console.log("先行断言：",dyStr.match(dyReg));//["213"]
+		console.log("先行断言整体：",dyStr1.match(dyReg1));//["hello "]
+
+		var dyStr3="133.14123";
+		var dyReg3=/\d+(?!\.)/;
+		console.log("先行否定断言：",dyStr3.match(dyReg3));//["13"]
+
+
+
+		</script>
+	</body>
+</html>
+	

@@ -10,29 +10,23 @@
 		<meta name="x5-fullscreen"content="true"/>
 		<meta name="full-screen"content="yes">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		<title>常用的转意字符</title>
+		<title>选择-分组-特殊引用</title>
 	</head>
 	<body>
-		<h3>常用的转意字符集合</h3>
-		
+		<h3>选择-分组-特殊引用</h3>
 		<ul>
 			<li>
-				<h4>\s 匹配空格：包含了制表符 空格符 断行符等 相当于[\t\r\n\v\f]</h4>
+				<h4>选择符： | </h4>
+				<p>/ab|cd|f/：可以匹配ab 或者 cd  或者f</p>
 			</li>
 		</ul>
 		<script>
-			/** 换行符和回车符的区别
-				\o  NUL字符（\u0000）
-				
-				\n  换行符
-				\r 回车符
-				\t 制表符(\u0009)
-				\v 垂直制表符
-				\f 换页符
-				
-				其他的需要转意的字符  减号不是特殊字符
-				^ $ . * + ? = ! : | \ / ( ) [ ] { }
-			**/
+			var str="strabbccc123ing";
+			var orReg=/a|c+/;
+
+			console.log(str.match(orReg));//a 只匹配第一项符合匹配规则的匹配项 除非包含了全局修饰符g
+
+
 		</script>
 	</body>
 </html>

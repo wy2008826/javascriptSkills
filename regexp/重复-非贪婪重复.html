@@ -10,14 +10,33 @@
 		<meta name="x5-fullscreen"content="true"/>
 		<meta name="full-screen"content="yes">
 		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-		<title>贪婪匹配-非贪婪匹配</title>
+		<title>重复-非贪婪重复</title>
 	</head>
 	<body>
-		<h3>贪婪匹配-非贪婪匹配</h3>
+		<h3>重复：? + * {}</h3>
 		
-		<p><strong>实际上，在量词后面都可以加上？以确定匹配模式</strong></p>
+		<ul>
+			<li>
+				<h4>
+					?:匹配0次或者1次 相当于{0,1}
+				</h4>
+				<h4>
+					+:匹配1次或者度次 相当于{1,}
+				</h4>
+				<h4>
+					*:匹配0次或者度次 相当于{0,}
+				</h4>
+				<h4>
+					{n,m}:至少n次，不能超过m次 <br>
+					{n,}:至少n次<br>
+					{n}:匹配n次 <br>
+				</h4>
+			</li>
+		</ul>
 
-
+		<h2>
+			以上所有重复都可以加上? 以表示非贪婪匹配模式，详见下面的js代码
+		</h2>
 		<script>
 			var str="aaab";
 			var reg1=/a+/;//贪婪匹配 匹配尽量多的a
@@ -27,6 +46,8 @@
 			console.log(str.match(reg2));//["aaa",index:0,input:"aaab"]
 			console.log(str.match(reg3));//aa
 		</script>
+
+
 	</body>
 </html>
 	

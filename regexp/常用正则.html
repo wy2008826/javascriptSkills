@@ -14,7 +14,7 @@
 		
 		function getParam(key,href){//两个关键点 1. [^&]：代表除了&以外的字符 2. ^和$可以是子组匹配项
 			var href=href.substr(href.indexOf("?")+1);
-			var reg=new RegExp("(^|&)"+key+"=([^&]*)($|&)");
+			var reg=new RegExp("(^|&)"+key+"=([^&]*)($|&)");//^ $ 为什么不能放在[$&]里面 只能放在(&|$)里面？ 为何不能如此： "(^|&)"+key+"=([^&]*)[$&]"
 			var param=decodeURIComponent(href.match(reg)[2]);
 			console.log(param);
 			return param;

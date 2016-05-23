@@ -1,0 +1,10 @@
+*{margin:0;padding:0;}
+
+svg{border:1px solid red;}
+svg circle.red{
+	/*fill:none;*/
+	fill:#f93;
+	stroke:block;
+	stroke-style:#f93;
+	stroke-width:3px;
+}

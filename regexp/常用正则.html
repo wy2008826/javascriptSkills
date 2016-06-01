@@ -16,7 +16,7 @@
 			var location=window.location.href;
 			var href=location.substr(location.indexOf("?")+1);
 			var reg=new RegExp("(^|&)"+key+"=([^&]*)($|&)");//^ $ 为什么不能放在[$&]里面 只能放在(&|$)里面？ 为何不能如此： "(^|&)"+key+"=([^&]*)[$&]"
-			var param=decodeURIComponent(href.match(reg)[2]);
+			var param=group?decodeURIComponent(href.match(reg)[2]):"";
 			console.log(param);
 			return param;
 		}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>闭包</title>
+	</head>
+	<body>
+		<a href="https://segmentfault.com/a/1190000008397563">闭包详解</a>
+		<ul>
+			<li>1.闭包的生成，一个父级函数可以生成多个闭包</li>
+			<li>2.本质是作用域链的生成和销毁，</li>
+		</ul>
+		<script>
+
+			//如下实例用同一个函数生成了两个闭包，两个闭包公用一个数据
+			var q="";
+			function a(){
+				var n=0;
+				q=function(){
+					n++
+				};
+				return function(){
+					n++;
+					console.log(n);
+				}
+			}
+		</script>
+	</body>
+</html>
+	

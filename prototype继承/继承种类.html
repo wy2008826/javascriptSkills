@@ -89,7 +89,7 @@
 
 			//声明子类
 			function SubClass(name){
-			    SuperClass.call(this,name)
+			    SuperClass.call(this,name)//这里不好理解，call的时候只是执行了父构造函数，传递了作用环境，但是prototype并没有执行 所以不会继承
 
 			}
 
@@ -101,7 +101,7 @@
 			console.log(b.book,b.name); //["c", "java", "htnl"] "gsc"
 
 			console.log(a.getBook()); //["c", "java", "htnl", "cccc"]
-			console.log(a.getName()) //TypeError
+			console.log(a.getName()) //TypeError 
 		</script>
 	</body>
 </html>

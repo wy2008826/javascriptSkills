@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>继承</title>
+	</head>
+	<body>
+		<ul>
+			<li>1.类继承：定义在子类的原型上，会继承父类的prototype</li>
+			<li>2.构造函数继承：定义在子类的构造函数中，不会继承父类的prototype属性</li>
+		</ul>
+
+		<script>
+			//类继承
+			//声明父类
+			function SuperClass(){
+			    //值类型
+			    this.superValue = true;
+			    //引用类型
+			    this.book = ['c','java','htnl']
+			}
+
+			//为父类添加方法
+			SuperClass.prototype.getSuperValue =function(){
+			    return this.superValue;
+			}
+
+			//声明子类
+			function SubClass(){
+			    this.subValue = false;
+			}
+			//继承父类
+			SubClass.prototype = new SuperClass();
+
+			//为子类添加方法
+			SubClass.prototype.getSubValue = function(){
+			    return this.subValue;
+			}
+
+			//测试
+			var a = new SubClass(); 
+			var b = new SubClass(); 
+			console.log(a.getSubValue()); //false
+			console.log(a.getSuperValue());  //true
+
+			console.log(a.book);//["c", "java", "htnl"]
+			console.log(b.book);//["c", "java", "htnl"]
+			a.book.push('css');
+			console.log(a.book);//["c", "java", "htnl", "css"]
+			console.log(b.book);//["c", "java", "htnl", "css"]
+
+			console.log(a.getSuperValue())//true
+			console.log(b.getSuperValue())//true
+			a.superValue = 'a';
+
+			console.log(a.getSuperValue())//a
+			console.log(b.getSuperValue())//true
+
+			console.log(a.getSubValue())//false
+			console.log(b.getSubValue())//false
+			a.subValue = 'sub';
+
+			console.log(a.getSubValue())//sub
+			console.log(b.getSubValue())//false
+		</script>
+		<script>
+			//构造函数继承
+			function SuperClass(name){
+			    this.name =name;
+			    this.book = ['c','java','htnl']
+
+			    this.getBook =function(){
+			        return this.book;
+			    }
+			}
+
+			//为父类添加方法
+			SuperClass.prototype.getName =function(){
+			    return this.name;
+			}
+
+			//声明子类
+			function SubClass(name){
+			    SuperClass.call(this,name)
+
+			}
+
+			var a = new SubClass('demongao');
+			var b = new SubClass('gsc');
+
+			a.book.push("cccc");
+			console.log(a.book,a.name); //["c", "java", "htnl", "cccc"] "demongao"
+			console.log(b.book,b.name); //["c", "java", "htnl"] "gsc"
+
+			console.log(a.getBook()); //["c", "java", "htnl", "cccc"]
+			console.log(a.getName()) //TypeError
+		</script>
+	</body>
+</html>
+	

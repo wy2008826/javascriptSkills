@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>传值和传引用</title>
+	</head>
+	<body>
+		<a href="https://segmentfault.com/a/1190000008410349">详细说明</a>
+		<script>
+			//	a b c分别为局部变量 a为传值   b c为传引用  b和c指向内存中 其中c被赋值了一个新的对象，指向了内存中新的区域  
+			//a={name:1}   b={name:1}  a和b实不相等的  他们指向内存中不同的区域 
+			function changeStuff(a, b, c) {
+			  a = a * 10;
+			  b.item = "changed";
+			  c = {item: "changed"};
+			}
+
+			var num = 10;
+			var obj1 = {item: "unchanged"};
+			var obj2 = {item: "unchanged"};
+
+			changeStuff(num, obj1, obj2);
+
+			console.log(num);//10
+			console.log(obj1.item);//changed    
+			console.log(obj2.item);//unchanged
+		</script>
+	</body>
+</html>
+	

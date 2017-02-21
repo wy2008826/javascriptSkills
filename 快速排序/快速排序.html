@@ -35,7 +35,7 @@
 					}
 				};
 				console.log(left,right);
-				return quickSort(left).concat([midNum],quickSort(right));
+				return quickSort(left).concat(midNum,quickSort(right));
 			}
 			var a=quickSort(arr);
 			console.log(a,[].concat.call(a));

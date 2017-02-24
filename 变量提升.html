@@ -18,6 +18,7 @@
 			<li>注意：只有声明本身会被提升，而赋值操作和其他运行逻辑都会停留在原地，想象一下，如果提升会改变代码的执行顺序，那么会造成非常严重的破坏。</li>
 			<li>函数声明会被提升，但是函数表达式不会被提升。</li>
 			<li>函数声明会优先于变量提升</li>
+			<li>if没有块级作用域，if 和else判断里面的函数会依次被提升</li>
 		</ul>
 		<script>
 			a=123;
@@ -47,6 +48,23 @@
 			}
 
 			aaa();//aaa is not a function
+		</script>
+
+
+		<script>
+			foo();      // 2
+
+			var a = true;
+
+			if (a) {
+			   function foo () {
+			      console.log(1);
+			   }
+			} else {
+			   function foo () {
+			      console.log(2);
+			   }
+			}
 		</script>
 	</body>
 </html>

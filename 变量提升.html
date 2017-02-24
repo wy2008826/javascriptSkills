@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>js变量提升</title>
+	</head>
+	<body>
+
+		<p>
+			注意：只有声明本身会被提升，而赋值操作和其他运行逻辑都会停留在原地，想象一下，如果提升会改变代码的执行顺序，那么会造成非常严重的破坏。
+		</p>
+		<script>
+			a=123;
+			var a;
+			console.log(a);//123
+
+
+			console.log(b);//直接报错
+		</script>
+	</body>
+</html>
+	

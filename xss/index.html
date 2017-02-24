@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+	<head>
+		<meta charset="utf-8">
+		<meta content="yes" name="apple-mobile-web-app-capable"> 
+		<meta content="yes" name="apple-touch-fullscreen"> 
+		<meta content="telephone=no,email=no" name="format-detection"> 	
+		<meta content="yes" name="apple-mobile-web-app-capable">
+		<meta content="black" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen"content="true"/>
+		<meta name="full-screen"content="yes">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<title>xss攻击</title>
+	</head>
+	<body>
+		<a href="https://segmentfault.com/a/1190000008423064">文章链接</a>
+		<input type="text" id="test" value="">
+		<dl>
+			<dd>Reflected XSS（基于反射的XSS攻击）</dd>
+			<dd>Stored XSS（基于存储的XSS攻击）</dd>
+			<dd>DOM-based or local XSS（基于DOM或本地的XSS攻击）</dd>
+		</dl>
+		<h4>Reflected</h4>
+		<dl>
+			<dt>举例1</dt>
+			<dd>做个假设，当亚马逊在搜索书籍，搜不到书的时候显示提交的名称。</dd>
+			<dd>在搜索框搜索内容，填入“<script>alert('handsome boy')</script>”, 点击搜索。</dd>
+			<dd>当前端页面没有对返回的数据进行过滤，直接显示在页面上， 这时就会alert那个字符串出来。</dd>
+			<dd>进而可以构造获取用户cookies的地址，通过QQ群或者垃圾邮件，来让其他人点击这个地址：</dd>
+		</dl>
+
+		<dl>
+			<dt>开发安全措施：</dt>
+			<dd>1.前端在显示服务端数据时候，不仅是标签内容需要过滤、转义，就连属性值也都可能需要。</dd>
+			<dd>2.后端接收请求时，验证请求是否为攻击请求，攻击则屏蔽。</dd>
+		</dl>
+		
+
+		<h4>Stored</h4>
+		
+		<dl>
+			<dt>发一篇文章，里面包含了恶意脚本 今天天气不错啊！<script>alert('handsome boy')</script></dt>
+		</dl>
+		<script>
+			var test=document.getElementById("test");
+			test.setAttribute("value","琅琊榜" onclick="javascript:alert('handsome boy')");
+		</script>
+	</body>
+</html>
+	
